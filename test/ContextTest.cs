@@ -1,22 +1,19 @@
 using Autofac;
-using Configuration;
-using Context;
-using IoC;
-using llm;
-using Run;
+using minimal_local_AI.Context;
+using minimal_local_AI.IoC;
 
-namespace ContextTest;
-public class ContextTest 
+namespace test;
+
+public class ContextTest
 {
     readonly IContext<LlamaInstance> _sut;
     readonly Illm<IAsyncEnumerable<string>, string, LlamaInstance> _sut2;
 
-    public ContextTest () 
+    public ContextTest()
     {
         var modules = new IoCModule("config.json");
         _sut = modules.Container().Resolve<IContext<LlamaInstance>>();
         _sut2 = modules.Container().Resolve<Illm<IAsyncEnumerable<string>, string, LlamaInstance>>();
-        
     }
 
     [Fact]
@@ -49,14 +46,13 @@ public class ContextTest
         Assert.True(infParams.Temperature == 0.8f);
         Assert.True(infParams.RepeatPenalty == 1.1f);
         Assert.True(llmParams.Prompt == File.ReadAllText("prompt.txt"));
-
     }
 
     [Fact]
     public async Task Should_Return_Llm_Executor()
-    {   
+    {
         var llmParams = await _sut.Init();
-        var executor =  _sut2.Infer(llmParams.Prompt);
+        var executor = _sut2.Infer(llmParams.Prompt);
         Assert.True(executor is IAsyncEnumerable<string>);
         Assert.False(executor is List<string>);
         _sut2.Dispose();

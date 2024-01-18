@@ -1,6 +1,6 @@
-namespace Run;
+namespace minimal_local_AI.Execution;
 
-public interface IRun 
+public interface IRun
 {
     public Task Run();
 }

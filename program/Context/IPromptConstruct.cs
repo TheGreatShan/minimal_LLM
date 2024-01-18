@@ -1,6 +1,6 @@
-namespace Prompts;
+namespace minimal_local_AI.Context;
 
-public interface IPromptConstruct <T>
+public interface IPromptConstruct<T>
 {
-     T Construct(string prompt);
+    T Construct(string prompt);
 }
