@@ -23,7 +23,7 @@ public class IoCTest
     public void Should_Return_Config()
     {
         Assert.Equal(_sut.Configuration(),
-            new Config(4096, 1337, 5, 2048, 0.8f, 1.1f, "mistral-7b-instruct-v0.2.Q4_K_M.gguf", "prompt.txt"));
+            new Config(4096, 1337, 5, 2048, 0.8f, 1.1f, "mistral-7b-instruct-v0.2.Q2_K.gguf", "prompt.txt"));
     }
 
     [Theory]
